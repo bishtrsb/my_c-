@@ -1,0 +1,84 @@
+#include<iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node * next;
+};
+
+void front(node **head_ref,int new_data)
+{
+    node*new_node=new node();
+    new_node->data=new_data;
+    new_node->next=(*head_ref);
+    (*head_ref)=new_node;
+
+}
+void print(node*n)
+{
+    while(n!=NULL)
+    {
+        cout<<n->data<<" ";
+        n=n->next;
+    }
+}
+
+void between(node*prev_node,int new_data)
+{ if(prev_node==NULL)
+    {
+        cout<<"node can not be empty";
+        return;
+    }
+    node*new_node=new node();
+    new_node->data=new_data;
+    new_node->next=prev_node->next;
+    prev_node->next=new_node;
+
+
+}
+void append(node**head_ref,int new_data)
+{
+    node*new_node=new node();
+    node*last=*head_ref;
+    new_node->data=new_data;
+    new_node->next=NULL;
+    if(*head_ref==NULL)
+    {
+        *head_ref=new_node;
+        return;
+    }
+    while(last->next!=NULL)
+    {
+        last=last->next;
+    }
+    last->next=new_node;
+    return;
+}
+int main()
+{
+    node*head=NULL;
+    node*second=NULL;
+    node*third=NULL;
+    node*four=NULL;
+   
+    head = new node();
+     second = new node();
+    third = new node();
+    four = new node();
+
+    head->data=4;
+    head->next=second;
+    second->data=5;
+    second->next=third;
+    third->data=6;
+    third->next=four;
+    four->data=7;
+    four->next=NULL;
+    front(&head,113);
+    between(head->next,88);
+    append(&head,99);
+    cout<<"LINKLIST"<<">>";
+    print(head);
+    return 0;
+
+}
